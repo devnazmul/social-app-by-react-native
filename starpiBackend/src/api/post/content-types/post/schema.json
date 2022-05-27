@@ -43,6 +43,12 @@
       "relation": "oneToMany",
       "target": "api::like.like",
       "mappedBy": "post"
+    },
+    "slug": {
+      "type": "uid",
+      "required": true,
+      "minLength": 5,
+      "maxLength": 110
     }
   }
 }
