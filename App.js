@@ -1,28 +1,95 @@
+import { Octicons } from '@expo/vector-icons';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
+import COLORS from './constants/colors';
+import FindFriends from './src/pages/FindFriends/FindFriends';
 import Home from './src/pages/Home/Home';
-export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState();
-  useEffect(()=>{
-    setIsLoggedIn(true)
-  },[])
-  return (
-    <View style={styles.container}>
-      <Home />
-      {/* <Registration /> */}
-      {/* <Login /> */}
+import Login from './src/pages/Login/Login';
+import Notification from './src/pages/Notification/Notification';
+import Profile from './src/pages/Profile/Profile';
+import Registration from './src/pages/Registration/Registration';
+import Search from './src/pages/Search/Search';
 
-    </View>
+const Tab = createMaterialTopTabNavigator();
+// const Tab = createNativeTabNavigator();
+
+export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    setIsLoggedIn(true)
+  }, [])
+  return (
+    <NavigationContainer>
+      <Tab.Navigator 
+      screenOptions={ {
+          tabBarStyle:{
+            backgroundColor:COLORS.primaryDark,
+            position:'fixed',
+            width:'100%'
+          }
+        }}
+      initialRouteName='Home' 
+      tabBarPosition='top' 
+      style={{ 
+        paddingTop: StatusBar.currentHeight,
+        
+       }}>
+        {
+          !isLoggedIn ? (
+            <>
+              <Tab.Screen name="Registration" component={Registration} />
+              <Tab.Screen name="Login" component={Login} />
+            </>
+
+          ) : (
+            <>
+              <Tab.Screen
+              style={{
+                backgroundColor:COLORS.primaryDark
+              }}
+                options={{
+                  title: (props) => <Octicons name="home" size={25} color="black" />,
+                }}
+                name="Home"
+                component={Home} />
+              <Tab.Screen
+                options={{
+                  title: (props) => <Octicons name="person-add" size={25} color="black" />,
+                }}
+                name="FindFriends"
+                component={FindFriends} />
+              <Tab.Screen
+                options={{
+                  title: (props) => <Octicons name="bell" size={24} color="black" />,
+                }}
+                name="Notification"
+                component={Notification} />
+              <Tab.Screen
+                options={{
+                  title: (props) => <Octicons name="search" size={24} color="black" />,
+                }}
+                name="Search"
+                component={Search} />
+              <Tab.Screen
+                options={{
+                  title: (props) => <Octicons name="person" size={25} color="black" />,
+                }}
+                name="Profile"
+                component={Profile} />
+            </>
+
+          )
+        }
+
+
+      </ Tab.Navigator>
+    </NavigationContainer>
+
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    height: '100%',
-    width: '100%',
-    // flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
 });
