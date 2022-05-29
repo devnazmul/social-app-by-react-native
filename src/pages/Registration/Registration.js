@@ -1,32 +1,52 @@
-import React from "react";
+import axios from "axios";
+import { React, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { } from "react-native-web";
 import colors from "../../../constants/colors";
+import { API_END_POINT } from "../../../constants/secret";
 
 const Registration = () => {
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
 
+  const [username, setUsername] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  const registrationHandler = () => {
+    
+    console.log({ username, email, password });
+    axios
+      .post(`${API_END_POINT}/api/auth/local/register`, {
+        username,
+        email,
+        password
+      })
+      .then(response => {
+        console.log('User profile', response.data.user);
+        console.log('User token', response.data.jwt);
+      })
+      .catch(error => {
+        console.log('An error occurred:', error.response);
+      });
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View>
         <Text style={styles.h1}>Create an account</Text>
       </View>
 
-      <TextInput 
+      <TextInput
         style={styles.input}
-        onChangeText={onChangeText} 
-        placeholder="full name"
+        onChangeText={(e) => {setUsername(e)}}
+        placeholder="username"
         placeholderTextColor={colors.lightGray}
       />
 
       <TextInput
         style={styles.input}
-        onChangeText={onChangeText}
+        onChangeText={(e) => setEmail(e)}
         placeholder="email"
         placeholderTextColor={colors.lightGray}
       />
-      <View style={styles.siblings}>
+      {/* <View style={styles.siblings}>
         <TextInput
           style={styles.siblingInput}
           onChangeText={onChangeText}
@@ -35,26 +55,26 @@ const Registration = () => {
         />
         <TextInput
           style={styles.siblingInput}
-          onChangeText={onChangeText}
+          onChangeText={}
           placeholder="email"
           placeholderTextColor={colors.lightGray}
         />
-      </View>
-
+      </View> */}
 
       <TextInput
         style={styles.input}
-        onChangeText={onChangeNumber}
+        onChangeText={(e) => setPassword(e)}
         placeholder="password"
         placeholderTextColor={colors.lightGray}
       />
+
       <TouchableOpacity
         style={styles.submitButton}
-        onPress={()=>alert('registration successfull!')}
+        onPress={() => registrationHandler()}
       >
         <Text style={styles.h3}>Press Here</Text>
       </TouchableOpacity>
-      
+
     </SafeAreaView>
   );
 };
@@ -80,7 +100,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 30,
   },
-  h3:{
+  h3: {
     fontSize: 20,
     color: colors.white,
     textAlign: "center",
@@ -105,15 +125,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     width: '48%'
   },
-  submitButton:{
-    marginTop:20,
-    height:40,
-    borderRadius:30,
-    display:'flex',
-    backgroundColor:colors.primaryDark,
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'center'
+  submitButton: {
+    marginTop: 20,
+    height: 40,
+    borderRadius: 30,
+    display: 'flex',
+    backgroundColor: colors.primaryDark,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 

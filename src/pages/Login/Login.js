@@ -1,11 +1,27 @@
-import React from "react";
-import { SafeAreaView, StyleSheet, TextInput, View, Text } from "react-native";
-import { Button } from "react-native-web";
+import axios from 'axios';
+import { React, useState } from "react";
+import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import colors from "../../../constants/colors";
+import { API_END_POINT } from '../../../constants/secret';
 
 const Login = () => {
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
+
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  const auth = () => {
+    axios
+      .post(`${API_END_POINT}/api/auth/local?populate=*`, {
+        identifier: email,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log('An error occurred:', error.response);
+      });
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -15,17 +31,21 @@ const Login = () => {
 
       <TextInput
         style={styles.input}
-        onChangeText={onChangeText}
+        onChangeText={(e) => setEmail(e)}
         placeholder="email"
         placeholderTextColor={colors.lightGray}
       />
 
       <TextInput
         style={styles.input}
-        onChangeText={onChangeNumber}
+        onChangeText={(e) => setPassword(e)}
         placeholder="password"
         placeholderTextColor={colors.lightGray}
       />
+
+      <TouchableOpacity style={styles.inputBtn} onPress={() => auth()}>
+        <Text style={{color:'white',fontSize:20, fontWeight:'bold'}}>Login</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -54,6 +74,18 @@ const styles = StyleSheet.create({
     margin: 12,
     padding: 10,
     backgroundColor: colors.white,
+    paddingHorizontal: 20,
+  },
+  inputBtn: {
+    fontSize: 25,
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius: 30,
+    height: 40,
+    margin: 12,
+    padding: 10,
+    backgroundColor: colors.darkGray,
     paddingHorizontal: 20,
   },
 });
