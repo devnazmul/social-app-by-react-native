@@ -1,78 +1,27 @@
-import { ScrollView, SafeAreaView, StyleSheet } from "react-native";
-import React from "react";
+// import { API_END_POINT, API_TOKEN } from "@env";
+import axios from 'axios';
+import { React, useEffect, useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import colors from "../../../constants/colors";
+import { API_END_POINT, API_TOKEN } from '../../../constants/secret';
 import PostCard from "../../components/PostCard";
 
-import colors from "../../../constants/colors";
-
 const Home = () => {
-  return (
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    axios.get(`${API_END_POINT}/api/posts?populate=*&Authorization`, {
+      headers: {
+        'Authorization': `Bearer ${API_TOKEN}` 
+      }
+    }).then(response => {
+      setPosts(response.data.data);
+    })
+  }, [posts])
+
+  return (  
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
+        {posts.map((post) => <PostCard key={post.id} data={post.attributes} />)}
       </ScrollView>
     </SafeAreaView>
   );
