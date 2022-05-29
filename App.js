@@ -1,4 +1,4 @@
-import { Octicons } from '@expo/vector-icons';
+import { Ionicons, Octicons } from '@expo/vector-icons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
@@ -22,20 +22,21 @@ export default function App() {
   }, [])
   return (
     <NavigationContainer>
-      <Tab.Navigator 
-      screenOptions={ {
-          tabBarStyle:{
-            backgroundColor:COLORS.primaryDark,
-            position:'fixed',
-            width:'100%'
+      <Tab.Navigator
+        screenOptions={{
+          tabBarStyle: {
+            backgroundColor: COLORS.primaryDark,
+          },
+          tabBarIndicatorStyle: {
+            backgroundColor: COLORS.secondaryYellow
           }
         }}
-      initialRouteName='Home' 
-      tabBarPosition='top' 
-      style={{ 
-        paddingTop: StatusBar.currentHeight,
-        
-       }}>
+        initialRouteName='Home'
+        tabBarPosition='top'
+        style={{
+          paddingTop: StatusBar.currentHeight,
+
+        }}>
         {
           !isLoggedIn ? (
             <>
@@ -46,35 +47,51 @@ export default function App() {
           ) : (
             <>
               <Tab.Screen
-              style={{
-                backgroundColor:COLORS.primaryDark
-              }}
+                style={{
+                  backgroundColor: COLORS.primaryDark
+                }}
                 options={{
-                  title: (props) => <Octicons name="home" size={25} color="black" />,
+                  title: (props) => <>
+                    {
+                      props.focused ? (<Ionicons name="ios-home" size={25} color={`${COLORS.secondaryYellow}`} />) : (<Ionicons name="ios-home-outline" size={25} color={`${COLORS.lightGray}`} />)
+                    }
+                  </>,
                 }}
                 name="Home"
                 component={Home} />
               <Tab.Screen
                 options={{
-                  title: (props) => <Octicons name="person-add" size={25} color="black" />,
+                  title: (props) => <>
+                    {
+                      props.focused ? (<Ionicons name="people" size={25} color={`${COLORS.secondaryYellow}`} />) : (<Ionicons name="people-outline" size={25} color={`${COLORS.lightGray}`} />)
+                    }
+                  </>,
                 }}
                 name="FindFriends"
                 component={FindFriends} />
               <Tab.Screen
                 options={{
-                  title: (props) => <Octicons name="bell" size={24} color="black" />,
+                  title: (props) => <>
+                    {
+                      props.focused ? (<Ionicons name="notifications" size={25} color={`${COLORS.secondaryYellow}`} />) : (<Ionicons name="notifications-outline" size={25} color={`${COLORS.lightGray}`} />)
+                    }
+                  </>,
                 }}
                 name="Notification"
                 component={Notification} />
               <Tab.Screen
                 options={{
-                  title: (props) => <Octicons name="search" size={24} color="black" />,
+                  title: (props) => <Octicons name="search" size={24} color={`${props.focused ? COLORS.secondaryYellow:COLORS.lightGray}`} />,
                 }}
                 name="Search"
                 component={Search} />
               <Tab.Screen
                 options={{
-                  title: (props) => <Octicons name="person" size={25} color="black" />,
+                  title: (props) => <>
+                    {
+                      props.focused ? (<Ionicons name="ios-person-circle" size={24} color={`${COLORS.secondaryYellow}`} />) : (<Ionicons name="ios-person-circle-outline" size={25} color={`${COLORS.lightGray}`} />)
+                    }
+                  </>,
                 }}
                 name="Profile"
                 component={Profile} />

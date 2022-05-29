@@ -16,7 +16,7 @@ const Home = () => {
     }).then(response => {
       setPosts(response.data.data);
     })
-  }, [posts])
+  }, [])
 
   return (  
     <SafeAreaView style={styles.container}>

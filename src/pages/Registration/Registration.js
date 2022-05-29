@@ -13,9 +13,9 @@ const Registration = () => {
         <Text style={styles.h1}>Create an account</Text>
       </View>
 
-      <TextInput
+      <TextInput 
         style={styles.input}
-        onChangeText={onChangeText}
+        onChangeText={onChangeText} 
         placeholder="full name"
         placeholderTextColor={colors.lightGray}
       />
