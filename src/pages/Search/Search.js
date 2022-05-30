@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text } from 'react-native'
+import { STYLE } from '../../../constants'
 
 const Search = () => {
   return (
-    <View>
+    <SafeAreaView style={STYLE.container}>
       <Text>Search</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 
