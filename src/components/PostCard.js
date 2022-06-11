@@ -1,4 +1,5 @@
 // import { API_END_POINT } from "@env";
+import { documentToReactComponents, reactNativeRenderer } from '@contentful/rich-text-react-renderer';
 import axios from 'axios';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
@@ -9,6 +10,7 @@ import { API_END_POINT, API_TOKEN } from '../../constants/secret';
 import Loading from './Loading';
 
 export default function PostCard({ data }) {
+  // console.log(data.);
   const [user, setUser] = useState();
   const [revealContent, setRevealContent] = useState(false)
   const [liked, setLiked] = useState(false)
@@ -21,12 +23,13 @@ export default function PostCard({ data }) {
     }).then(response => {
       setUser(response.data);
     })
-  }, [data.user.data.id])
-
-
+  }, [])
 
   return (
     <>
+    {
+      documentToReactComponents(data.content, reactNativeRenderer)
+    }
       {
         user ?
           // ============================ POST CARD START =========================
@@ -49,6 +52,7 @@ export default function PostCard({ data }) {
               {/*======================== POST OWNER INFO START =================== */}
               <TouchableOpacity onPress={() => alert('profile')} style={styles.postOwnerContainer} >
                 <Image style={styles.profileImage} source={{ uri: `${API_END_POINT}${user.profile_url.url}`, width: 40, height: 40 }} />
+
                 <View style={{ marginLeft: 10 }} >
                   <Text style={styles.usernameStyle} >{data.user.data.attributes.username}</Text>
                   <Text style={styles.postTimeStamp} >{moment(data.publishedAt).fromNow()}</Text>
@@ -62,7 +66,7 @@ export default function PostCard({ data }) {
                   revealContent ? (
                     <>
                       {
-                        data.content
+                        (data.content)
                       }
                       {
                         data.content.length > 90 && <Text onPress={() => { setRevealContent(revealContent ? false : true) }} style={styles.seeMoreButton} > See less</Text>

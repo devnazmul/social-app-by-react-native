@@ -23,7 +23,8 @@ const STYLE = {
         backgroundColor: COLORS.primaryDark,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginHorizontal: 12,
     },
     input: {
         fontSize: 20,

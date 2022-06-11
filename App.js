@@ -1,8 +1,7 @@
 import { Ionicons, Octicons } from '@expo/vector-icons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import COLORS from './constants/colors';
 import FindFriends from './src/pages/FindFriends/FindFriends';
@@ -21,26 +20,17 @@ const Tab = createMaterialTopTabNavigator();
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [session, setSession] = useState({})
-  
-  useEffect(() => {
-    AsyncStorage.getItem('USER_DATA').then((data) => {
-      setSession(JSON.parse(data))
-    }).catch(err => { throw err });
-  }, [])
-
 
   return (
-   
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
-          tabBarStyle: {backgroundColor: COLORS.primaryDark},
-          tabBarIndicatorStyle: {backgroundColor: COLORS.secondaryYellow}
+          tabBarStyle: { backgroundColor: COLORS.primaryDark },
+          tabBarIndicatorStyle: { backgroundColor: COLORS.secondaryYellow }
         }}
         initialRouteName='Home'
         tabBarPosition='top'
-        style={{paddingTop: StatusBar.currentHeight}}>
+        style={{ paddingTop: StatusBar.currentHeight }}>
         {
           !isLoggedIn ? (
             <>
@@ -101,7 +91,7 @@ export default function App() {
                   </>,
                 }}
                 name="Home">
-                {props => <Home {...props} setIsLoggedIn={setIsLoggedIn} session={session} />}
+                {props => <Home {...props} setIsLoggedIn={setIsLoggedIn} />}
               </Tab.Screen>
               <Tab.Screen
                 options={{
@@ -153,7 +143,6 @@ export default function App() {
         }
       </ Tab.Navigator>
     </NavigationContainer>
-
   );
 }
 

@@ -1063,6 +1063,18 @@
     deepmerge "^3.2.0"
     hoist-non-react-statics "^3.3.0"
 
+"@contentful/rich-text-react-renderer@^15.12.1":
+  version "15.12.1"
+  resolved "https://registry.yarnpkg.com/@contentful/rich-text-react-renderer/-/rich-text-react-renderer-15.12.1.tgz#978c335e7ad5284dc6790a6a8c0ec16878b957b0"
+  integrity sha512-bQ69cN51iGBTF3/nYi5MGUaDJ/lnrEXtCUBCxulIZ0fLS/AAEledZTJcEKs+PKeYYgDqiUVDsmx2xZP2QsJJ+Q==
+  dependencies:
+    "@contentful/rich-text-types" "^15.12.1"
+
+"@contentful/rich-text-types@^15.12.1":
+  version "15.12.1"
+  resolved "https://registry.yarnpkg.com/@contentful/rich-text-types/-/rich-text-types-15.12.1.tgz#3b131f03fc55b6001f6eb5f5615aefb22678b3d3"
+  integrity sha512-WQJic0fnAbTa8xzO3Z+aVqDmA5+JMNQlATQMVJ40GoOrnM8YoJZsKGf6xX/O6Y6Eq10T1LrpxIOslODFI9qFgg==
+
 "@editorjs/editorjs@^2.24.3":
   version "2.24.3"
   resolved "https://registry.yarnpkg.com/@editorjs/editorjs/-/editorjs-2.24.3.tgz#60ee6dd37d57b870ef29754355d77f9c61f30e79"
@@ -5766,6 +5778,11 @@ react-native-reanimated@~2.8.0:
     lodash.isequal "^4.5.0"
     setimmediate "^1.0.5"
     string-hash-64 "^1.0.3"
+
+react-native-rich-text@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-rich-text/-/react-native-rich-text-1.0.4.tgz#de495c7eafec3735ba2f24cc1fc8e126b6dfbc77"
+  integrity sha512-fzzTELYr+C+gl9G5TXUvEBu8y2wmCWyBzXSSIcu9cb+xPksfTirlB09mfPz99zvaDNPhhovCV2+9/CijTsnzJg==
 
 react-native-safe-area-context@4.2.4:
   version "4.2.4"
