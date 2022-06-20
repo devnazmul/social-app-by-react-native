@@ -4,10 +4,6 @@ const PostSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    title: {
-        type: String,
-        required: true,
-    },
     image: {
         type: String,
     },
@@ -50,6 +46,10 @@ const CommentSchema = mongoose.Schema({
     image: {
         type: String,
         required: false
+    },
+    likes: {
+        type: [String],
+        default: []
     },
     createdAt: {
         type: Date,
