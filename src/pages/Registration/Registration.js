@@ -1,21 +1,21 @@
+import { API_END_POINT } from "@env";
 import axios from "axios";
-import { React, useState } from "react";
+import { useState } from "react";
 import { SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { COLORS, STYLE } from "../../../constants";
-import { API_END_POINT } from "../../../constants/secret";
 
 const Registration = () => {
 
-  const [username, setUsername] = useState(null);
+  const [fullName, setFullName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
   const registrationHandler = () => {
     
-    console.log({ username, email, password });
+    console.log({ fullName, email, password });
     axios
-      .post(`${API_END_POINT}/api/auth/local/register`, {
-        username,
+      .post(`${API_END_POINT}/users/create`, {
+        fullName,
         email,
         password
       })
@@ -35,8 +35,8 @@ const Registration = () => {
 
       <TextInput
         style={STYLE.input}
-        onChangeText={(e) => {setUsername(e)}}
-        placeholder="username"
+        onChangeText={(e) => {setFullName(e)}}
+        placeholder="full name"
         placeholderTextColor={COLORS.lightGray}
       />
 
