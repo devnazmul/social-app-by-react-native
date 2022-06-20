@@ -3929,6 +3929,11 @@ image-size@^0.6.0:
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.6.3.tgz#e7e5c65bb534bd7cdcedd6cb5166272a85f75fb2"
   integrity sha512-47xSUiQioGaB96nqtp5/q55m0aBQSQdyIloMOc/x+QVTDZLNmXE892IIDrJ0hM1A5vcNUDD5tDffkSP5lCaIIA==
 
+imgbb-uploader@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/imgbb-uploader/-/imgbb-uploader-1.5.0.tgz#9b2245bb68845c45f6b6f83635a637aa055f39c9"
+  integrity sha512-60cEP5Mw48ZM0evf/mo1j/sHPzgaM83z9cdjDRf6DNrpbWk/dw+2UIe2MRtC1HqQ6i9GyJfGOzNbspriWVGTeA==
+
 import-fresh@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/import-fresh/-/import-fresh-2.0.0.tgz#d81355c15612d386c61f9ddd3922d4304822a546"
@@ -5718,6 +5723,11 @@ react-native-codegen@^0.0.17:
     flow-parser "^0.121.0"
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
+
+react-native-config@^1.4.6:
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-1.4.6.tgz#2aefebf4d9cf02831e64bbc1307596bd212f6d42"
+  integrity sha512-cSLdOfva2IPCxh6HjHN1IDVW9ratAvNnnAUx6ar2Byvr8KQU7++ysdFYPaoNVuJURuYoAKgvjab8ZcnwGZIO6Q==
 
 react-native-dotenv@^3.3.1:
   version "3.3.1"

@@ -1,9 +1,9 @@
+import { API_END_POINT } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
-import { React, useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { COLORS, STYLE } from '../../../constants';
-import { API_END_POINT } from '../../../constants/secret';
 
 const Login = ({ setIsLoggedIn }) => {
 
@@ -11,34 +11,34 @@ const Login = ({ setIsLoggedIn }) => {
   const [password, setPassword] = useState(null);
 
   const auth = () => {
-    axios
-      .post(`${API_END_POINT}/api/auth/local?populate=*`, {
-        identifier: email,
-        password: password,
-      })
-      .then(async (response) => {
-        try {
+    axios.post(`${API_END_POINT}/users/login`, {
+      email: email,
+      password: password,
+    }).then((response) => {
+        if (!response.data.success) {
+          alert(response.data.message)
+        } else {
           AsyncStorage.setItem('USER_DATA', JSON.stringify({
-            jwt: response.data.jwt,
-            user_id: response.data.user.id,
-            user_email: response.data.user.email,
-            username: response.data.user.email
-          }));
+              token: response.data.data.token,
+              user_id: response.data.data.userId,
+              user_email: response.data.data.email,
+              user_profile_pic_url: response.data.data.profilePic.url,
+              username: response.data.data.username
+            })).then(()=>{
+              setIsLoggedIn(true)
+            }).catch((error)=>{
+              alert(error)
+            })
         }
-        catch (err) {
-          throw err;
-        }
-      }).then(async () => {
-        setIsLoggedIn(true)
-      })
-      .catch(error => {
-        console.log('An error occurred:', error.response);
+      }).catch(error => {
+        alert('An error occurred:', error.response);
       });
   }
+
   useEffect(() => {
     AsyncStorage.getItem('USER_DATA').then((data) => {
       const dataObj = JSON.parse(data);
-      !dataObj?.jwt ? setIsLoggedIn(false) : setIsLoggedIn(true)
+      !dataObj?.token ? setIsLoggedIn(false) : setIsLoggedIn(true)
     }).catch(err => { throw err });
   }, [])
 
