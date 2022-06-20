@@ -1,7 +1,7 @@
 import { Ionicons, Octicons } from '@expo/vector-icons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import COLORS from './constants/colors';
 import FindFriends from './src/pages/FindFriends/FindFriends';
